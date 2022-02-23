@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.mycompany.jwtdemo.filter.JwtAuthenticationFilter;
 import com.mycompany.jwtdemo.service.CustomUserDetailService;
 
 @Configuration
@@ -20,6 +22,9 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
+	
+	@Autowired
+	private JwtAuthenticationFilter jwtFilter;
 
 	//Aqui dizemos como nós queremos gerenciar o processo de autenticação
 	@Override
@@ -38,6 +43,8 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean
