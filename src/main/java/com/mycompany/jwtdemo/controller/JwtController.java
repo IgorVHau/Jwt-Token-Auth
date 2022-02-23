@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.jwtdemo.model.JwtRequest;
 import com.mycompany.jwtdemo.model.JwtResponse;
+import com.mycompany.jwtdemo.model.UserModel;
 import com.mycompany.jwtdemo.service.CustomUserDetailService;
 import com.mycompany.jwtdemo.util.JwtUtil;
 
@@ -28,6 +29,14 @@ public class JwtController {
 	
 	@Autowired
 	private JwtUtil jwtUtil;
+	
+	@PostMapping("/register")
+	public ResponseEntity<UserModel> register(@RequestBody UserModel userModel){
+		//UserService is necessary here
+		UserModel userModel1 = customUserDetailService.register(userModel);
+		ResponseEntity<UserModel> re = new ResponseEntity<>(userModel1, HttpStatus.CREATED);
+		return re;
+	}
 	
 	@PostMapping("/generateToken")
 	public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest jwtRequest) {
