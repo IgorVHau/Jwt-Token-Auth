@@ -42,6 +42,8 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/api/generateToken").permitAll()
 			.and()
 			.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+			.and()
+			.authorizeRequests().antMatchers("/api/roles").permitAll()
 			.anyRequest().authenticated()//for any other request, authentication should be performed
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
