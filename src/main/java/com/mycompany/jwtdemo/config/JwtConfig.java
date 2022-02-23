@@ -40,7 +40,9 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 			.cors().disable()
 			.authorizeRequests()
 			.antMatchers("/api/generateToken").permitAll()
-			.anyRequest().authenticated()
+			.and()
+			.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+			.anyRequest().authenticated()//for any other request, authentication should be performed
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
