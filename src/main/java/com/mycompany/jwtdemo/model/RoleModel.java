@@ -22,5 +22,14 @@ public class RoleModel {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+	public RoleModel(Long id, String roleName) {
+		super();
+		this.id = id;
+		this.roleName = roleName;
+	}
+	
+	public RoleModel() {
+		
+	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.mycompany.jwtdemo.entity.RoleEntity;
 import com.mycompany.jwtdemo.entity.UserEntity;
 import com.mycompany.jwtdemo.repository.UserRepository;
@@ -25,7 +26,7 @@ public class UserModel implements UserDetails {
 	private String lastName;
 	private String email;
 	private String phone;
-	private Set<RoleEntity> roles = new HashSet<>();
+	private Set<RoleModel> roles = new HashSet<>();
 //	After modifications * in CustomUserDetailService
 //	@Autowired
 //	private UserRepository userRepository;
@@ -72,10 +73,10 @@ public class UserModel implements UserDetails {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Set<RoleEntity> getRoles() {
+	public Set<RoleModel> getRoles() {
 		return roles;
 	}
-	public void setRoles(Set<RoleEntity> roles) {
+	public void setRoles(Set<RoleModel> roles) {
 		this.roles = roles;
 	}
 	
