@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +18,7 @@ import com.mycompany.jwtdemo.service.CustomUserDetailService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)//this helps to add method level authorization security
 public class JwtConfig extends WebSecurityConfigurerAdapter {
 	
 	//It's here that starts a circular reference issue
@@ -44,7 +46,7 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.cors().disable()
 			.authorizeRequests()
-			.antMatchers("/api/login", "/api/register", "/h2-console/**").permitAll()
+			.antMatchers("/api/login", "/api/register").permitAll()
 			.anyRequest().authenticated()//for any other request, authentication should be performed
 			.and()
 			.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
