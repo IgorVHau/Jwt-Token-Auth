@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mycompany.jwtdemo.entity.UserEntity;
 
+@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
 	public UserEntity findByUsername(String username);
